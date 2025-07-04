@@ -26,4 +26,5 @@ int main() {
     vector shifts = {1,1,1};  
     cout<<s.shiftingLetters(st, shifts); // output must be ddd
 
+    return 0;
 }
