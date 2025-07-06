@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -10,26 +9,22 @@ public:
     int lengthOfLongestSubstring(string s)
     {
         int startIndex = 0;
+        int characters[128];
 
-        unordered_map<char, int> characters;
+        fill(characters, characters + 128, -1);
 
         int longest = 0;
 
         for (int i = 0; i < s.length(); i++)
         {
-            unordered_map<char, int>::iterator mapResult = characters.find(s[i]);
+            char c = s[i];
 
-            if (mapResult != characters.end())
+            if (characters[c] != -1 && characters[c] >= startIndex)
             {
-                if (mapResult->second >= startIndex)
-                    startIndex = mapResult->second + 1;
+                startIndex = characters[c] + 1;
+            }
 
-                characters[s[i]] = i;
-            }
-            else
-            {
-                characters.insert({s[i], i});
-            }
+            characters[c] = i;
 
             longest = max(longest, i - startIndex + 1);
         }
